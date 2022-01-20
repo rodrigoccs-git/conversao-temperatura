@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-conv
+spec:
+  selector:
+    matchLabels:
+      app: app-conv
+  template:
+    metadata:
+      labels:
+        app: app-conv
+    spec:
+      containers:
+      - name: app-conv
+        image: rodrigoccs/conversao-temperatura:v2
+        ports:
+        - containerPort: 8080
+
+---
+
+# Service da aplicação
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-conv
+spec:
+  selector:
+    app: app-conv
+  ports:
+  - port: 80
+  type: NodePort
