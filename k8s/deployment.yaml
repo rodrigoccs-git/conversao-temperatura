@@ -13,9 +13,9 @@ spec:
     spec:
       containers:
       - name: app-conv
-        image: rodrigoccs/conversao-temperatura:v2
+        image: rodrigoccs/conversao-temperatura:v3
         ports:
-        - containerPort: 8080
+          - containerPort: 8080
 
 ---
 
@@ -29,4 +29,6 @@ spec:
     app: app-conv
   ports:
   - port: 80
-  type: NodePort
+    targetPort: 8080
+    nodePort: 30000
+  type: LoadBalancer
